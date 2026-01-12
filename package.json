@@ -1,0 +1,25 @@
+{
+  "name": "word-calendar-gen",
+  "version": "1.0.0",
+  "description": "Generate compact Word calendar files",
+  "main": "dist/cli.js",
+  "scripts": {
+    "build": "esbuild src/cli.ts --bundle --platform=node --outfile=dist/cli.js",
+    "build:web": "esbuild src/calendar.ts --bundle --outfile=web/calendar.bundle.js --format=iife --global-name=Calendar --define:global=window",
+    "typecheck": "tsc --noEmit",
+    "test:integration": "npm run build && mkdir -p test-output && node dist/cli.js -o test-output/test.docx && unzip -p test-output/test.docx word/document.xml | grep -q 'Hello World' && echo 'Integration test passed'"
+  },
+  "keywords": [],
+  "author": "Lucian Wischik",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "docx": "^9.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.7.0"
+  }
+}

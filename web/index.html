@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar Generator</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 400px; margin: 50px auto; padding: 20px; }
+    button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Calendar Generator</h1>
+  <button id="generate">Generate Calendar</button>
+  <script src="calendar.bundle.js"></script>
+  <script>
+    document.getElementById('generate').addEventListener('click', async () => {
+      const buffer = await Calendar.generateCalendarDocx();
+      const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'calendar.docx';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
