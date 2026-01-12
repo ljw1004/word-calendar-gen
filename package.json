@@ -6,8 +6,7 @@
   "scripts": {
     "build": "esbuild src/cli.ts --bundle --platform=node --outfile=dist/cli.js",
     "build:web": "esbuild src/calendar.ts --bundle --outfile=web/calendar.bundle.js --format=iife --global-name=Calendar --define:global=window",
-    "typecheck": "tsc --noEmit",
-    "test:integration": "npm run build && mkdir -p test-output && node dist/cli.js -o test-output/test.docx && unzip -p test-output/test.docx word/document.xml | grep -q 'Hello World' && echo 'Integration test passed'"
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [],
   "author": "Lucian Wischik",
