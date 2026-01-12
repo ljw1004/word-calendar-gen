@@ -9,7 +9,7 @@ Generates Word .docx calendar files, in the style of reference/*
 - `npm run build:web` — build browser bundle to web/calendar.bundle.js
 - `npm run typecheck` — type check
 - `npm run test:integration` — build, generate docx, verify XML content
-- `npm run build && node dist/cli.js -o test-output/test.docx` — generate test docx
+- `npm run build && node dist/cli.js --start 2025-3 --months 3 -o test-output/test.docx` — generate test docx
 - `uvx docx2pdf test-output/test.docx test-output/test.pdf` — convert docx to PDF for visual verification (uses Microsoft Word via automation)
 
 ## Coding and interaction guidelines

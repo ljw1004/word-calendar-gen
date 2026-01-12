@@ -6,16 +6,68 @@
   <title>Calendar Generator</title>
   <style>
     body { font-family: system-ui, sans-serif; max-width: 400px; margin: 50px auto; padding: 20px; }
-    button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    label { display: block; margin-top: 15px; }
+    select { padding: 5px; font-size: 16px; }
+    button { margin-top: 20px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
   </style>
 </head>
 <body>
   <h1>Calendar Generator</h1>
+
+  <label>
+    Start:
+    <select id="year">
+      <option value="2025">2025</option>
+      <option value="2026" selected>2026</option>
+      <option value="2027">2027</option>
+      <option value="2028">2028</option>
+      <option value="2029">2029</option>
+      <option value="2030">2030</option>
+    </select>
+    <select id="month">
+      <option value="1">January</option>
+      <option value="2">February</option>
+      <option value="3">March</option>
+      <option value="4">April</option>
+      <option value="5">May</option>
+      <option value="6" selected>June</option>
+      <option value="7">July</option>
+      <option value="8">August</option>
+      <option value="9">September</option>
+      <option value="10">October</option>
+      <option value="11">November</option>
+      <option value="12">December</option>
+    </select>
+  </label>
+
+  <label>
+    Number of months:
+    <select id="months">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3" selected>3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+    </select>
+  </label>
+
   <button id="generate">Generate Calendar</button>
+
   <script src="calendar.bundle.js"></script>
   <script>
     document.getElementById('generate').addEventListener('click', async () => {
-      const buffer = await Calendar.generateCalendarDocx();
+      const startYear = parseInt(document.getElementById('year').value, 10);
+      const startMonth = parseInt(document.getElementById('month').value, 10);
+      const months = parseInt(document.getElementById('months').value, 10);
+
+      const buffer = await Calendar.generateCalendarDocx(startYear, startMonth, months);
       const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
