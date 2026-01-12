@@ -2,7 +2,7 @@
 
 Generate compact Word (.docx) calendar files.
 
-![Screenshot](screenshot.png)
+![Screenshot](web/screenshot.png)
 
 ## Use Online
 
