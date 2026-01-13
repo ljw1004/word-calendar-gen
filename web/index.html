@@ -3,16 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calendar Generator</title>
+  <meta name="description" content="Generate blank Word .docx calendar files to print and fill in">
+  <title>Word .docx Calendar Generator</title>
   <style>
     body { font-family: system-ui, sans-serif; max-width: 400px; margin: 50px auto; padding: 20px; }
-    label { display: block; margin-top: 15px; }
-    select { padding: 5px; font-size: 16px; }
-    button { margin-top: 20px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
   </style>
 </head>
 <body>
-  <h1>Calendar Generator</h1>
+  <h1>Word .docx Calendar Generator</h1>
 
   <label>
     Start:
@@ -41,7 +39,7 @@
   </label>
 
   <label>
-    Number of months:
+    Months:
     <select id="months">
       <option value="1">1</option>
       <option value="2">2</option>
@@ -57,7 +55,7 @@
       <option value="12">12</option>
     </select>
   </label>
-
+  <br/>
   <button id="generate">Generate Calendar</button>
 
   <p style="margin-top: 30px;">This produces a blank calendar that you can fill in. Here's how we filled in our family calendar last spring.</p>

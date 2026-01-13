@@ -9,13 +9,14 @@ Generates Word .docx calendar files, in the style of reference/*
 - `npm run build:web` — build browser bundle to web/calendar.bundle.js
 - `npm run typecheck` — type check
 - `npm run test:integration` — build, generate docx, verify XML content
-- `npm run build && node dist/cli.js --start 2026-6 --months 3 -o test-output/test.docx` — generate test docx
+- `npm run build && node dist/cli.js 2026-6 3 test-output/test.docx` — generate test docx
 - `uvx docx2pdf test-output/test.docx test-output/test.pdf` — convert docx to PDF for visual verification (uses Microsoft Word via automation)
 - Browser integration via Chrome DevTools MCP
   - Use `mcp__chrome-devtools__new_page` tool to open web/index.html
   - Use `mcp__chrome-devtools__take_snapshot` to get element UIDs
   - Use `mcp__chrome-devtools__click` to click the Generate button
   - Use `mcp__chrome-devtools__list_console_messages` to check for errors
+- `rsync -rtvz --progress --delete --exclude='.DS_Store' web/ lu@unto.me:/mnt/disks/pod7disk/www/untome/word-calendar` — deploy to web server
 
 ## Coding and interaction guidelines
 
