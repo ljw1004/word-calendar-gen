@@ -16,7 +16,7 @@ Generates Word .docx calendar files, in the style of reference/*
   - Use `mcp__chrome-devtools__take_snapshot` to get element UIDs
   - Use `mcp__chrome-devtools__click` to click the Generate button
   - Use `mcp__chrome-devtools__list_console_messages` to check for errors
-- `rsync -rtvz --progress --delete --exclude='.DS_Store' web/ lu@unto.me:/mnt/disks/pod7disk/www/untome/word-calendar` — deploy to web server
+- `rsync -rtvz --progress --delete --exclude='.DS_Store' web/ lu@unto.me:/mnt/disks/pod7disk/www/untome/word-calendar` — deploy to web server (after building browser bundle)
 
 ## Coding and interaction guidelines
 
@@ -31,6 +31,7 @@ This is a small compact minimal program. We will:
 - Invariants. I like provably correct code.
    - If there are two linked variables/fields (e.g. is_open and open_file_name), it's usually better to combine them into a single variable. If they must be kept separate, then (1) at declaration site we must document the invariant that relates them, (2) for every function that modifies them it must document how it restores the invariant.
    - If there is async re-entrancy, we must document what invariants are assumed.
+- Contracts. Every function is a contract. Every field is a contract about how it should be used. Contracts must be stated in the doc-block for the function or field. Callers of the function must only use what's described in its contract.
 
 For interaction,
 - If the user asks a question "what is the difference", then the agent must give an answer, and must NOT proactively code.

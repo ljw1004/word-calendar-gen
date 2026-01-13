@@ -30,8 +30,8 @@ function getDaysInMonth(year: number, month: number): number {
   return new Date(year, month, 0).getDate();
 }
 
+/** Returns day of week for the 1st of the month: 0 = Sunday, 6 = Saturday. */
 function getFirstDayOfWeek(year: number, month: number): number {
-  // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
   return new Date(year, month - 1, 1).getDay();
 }
 
@@ -39,6 +39,7 @@ function isWeekend(dayOfWeek: number): boolean {
   return dayOfWeek === 0 || dayOfWeek === 6;
 }
 
+/** Cell with no content, all borders hidden, no shading. Used for padding. */
 function createEmptyCell(): TableCell {
   return new TableCell({
     children: [new Paragraph({})],
@@ -52,6 +53,11 @@ function createEmptyCell(): TableCell {
   });
 }
 
+/**
+ * Month label cell (e.g. "Mar"). Gray text, bottom-aligned.
+ * @param rotated - true: 90° CCW rotation, right border visible (inline before day 1).
+ *                  false: no rotation, all borders hidden (in dedicated label row).
+ */
 function createLabelCell(monthName: string, rotated: boolean): TableCell {
   const paragraph = new Paragraph({
     children: [
@@ -85,6 +91,11 @@ function createLabelCell(monthName: string, rotated: boolean): TableCell {
   });
 }
 
+/**
+ * Day cell with two lines: gray day number + empty line for user notes.
+ * The trailing space after the number is unstyled, so user-typed text appears black.
+ * Weekend cells (Sun/Sat) have light gray background shading.
+ */
 function createDayCell(day: number, dayOfWeek: number): TableCell {
   const weekend = isWeekend(dayOfWeek);
   return new TableCell({
@@ -117,6 +128,17 @@ function createDayCell(day: number, dayOfWeek: number): TableCell {
   });
 }
 
+/**
+ * Generates rows for a continuous calendar table spanning multiple months.
+ *
+ * Each month occupies 5-6 rows. Month label placement depends on which day
+ * of the week day 1 falls:
+ * - Day 1 is Sunday: insert a dedicated label row above, label not rotated
+ * - Day 1 is Mon-Sat: label goes in the cell immediately before day 1, rotated 90° CCW
+ *
+ * Empty cells (no borders, no shading) fill gaps: before the label in the first
+ * week, and after the last day of the month.
+ */
 function generateCalendarRows(startYear: number, startMonth: number, months: number): TableRow[] {
   const rows: TableRow[] = [];
 
@@ -184,6 +206,7 @@ function generateCalendarRows(startYear: number, startMonth: number, months: num
   return rows;
 }
 
+/** Creates a Word document containing a single calendar table. */
 export function generateCalendarDocx(startYear: number, startMonth: number, months: number): Document {
   const rows = generateCalendarRows(startYear, startMonth, months);
 
