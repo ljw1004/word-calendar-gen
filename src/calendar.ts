@@ -1,6 +1,5 @@
 import {
   Document,
-  Packer,
   Paragraph,
   TextRun,
   Table,
@@ -13,6 +12,8 @@ import {
   VerticalAlign,
   TableLayoutType,
 } from "docx";
+
+export { Packer } from "docx";
 
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const COLUMN_WIDTH = 1152; // dxa (~0.8 inches)
@@ -183,7 +184,7 @@ function generateCalendarRows(startYear: number, startMonth: number, months: num
   return rows;
 }
 
-export async function generateCalendarDocx(startYear: number, startMonth: number, months: number): Promise<Uint8Array> {
+export function generateCalendarDocx(startYear: number, startMonth: number, months: number): Document {
   const rows = generateCalendarRows(startYear, startMonth, months);
 
   const table = new Table({
@@ -193,7 +194,7 @@ export async function generateCalendarDocx(startYear: number, startMonth: number
     layout: TableLayoutType.FIXED,
   });
 
-  const doc = new Document({
+  return new Document({
     styles: {
       default: {
         document: {
@@ -212,6 +213,4 @@ export async function generateCalendarDocx(startYear: number, startMonth: number
       },
     ],
   });
-
-  return await Packer.toBuffer(doc);
 }

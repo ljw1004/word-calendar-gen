@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import { generateCalendarDocx } from "./calendar";
+import { generateCalendarDocx, Packer } from "./calendar";
 
 function printUsage(): never {
   console.error(`Usage: word-calendar-gen --start YYYY-M --months N [-o output.docx]
@@ -56,7 +56,8 @@ function parseArgs(args: string[]): { startYear: number; startMonth: number; mon
 async function main() {
   const { startYear, startMonth, months, outputPath } = parseArgs(process.argv.slice(2));
 
-  const buffer = await generateCalendarDocx(startYear, startMonth, months);
+  const doc = generateCalendarDocx(startYear, startMonth, months);
+  const buffer = await Packer.toBuffer(doc);
   fs.writeFileSync(outputPath, buffer);
   console.log(`Generated: ${outputPath}`);
 }

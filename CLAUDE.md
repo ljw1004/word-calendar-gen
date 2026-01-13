@@ -11,6 +11,11 @@ Generates Word .docx calendar files, in the style of reference/*
 - `npm run test:integration` — build, generate docx, verify XML content
 - `npm run build && node dist/cli.js --start 2026-6 --months 3 -o test-output/test.docx` — generate test docx
 - `uvx docx2pdf test-output/test.docx test-output/test.pdf` — convert docx to PDF for visual verification (uses Microsoft Word via automation)
+- Browser integration via Chrome DevTools MCP
+  - Use `mcp__chrome-devtools__new_page` tool to open web/index.html
+  - Use `mcp__chrome-devtools__take_snapshot` to get element UIDs
+  - Use `mcp__chrome-devtools__click` to click the Generate button
+  - Use `mcp__chrome-devtools__list_console_messages` to check for errors
 
 ## Coding and interaction guidelines
 

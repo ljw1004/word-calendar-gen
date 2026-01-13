@@ -60,6 +60,9 @@
 
   <button id="generate">Generate Calendar</button>
 
+  <p style="margin-top: 30px;">This produces a blank calendar that you can fill in. Here's how we filled in our family calendar last spring.</p>
+  <img src="screenshot.png" alt="Example filled-in family calendar" style="max-width: 100%;">
+
   <script src="calendar.bundle.js"></script>
   <script>
     document.getElementById('generate').addEventListener('click', async () => {
@@ -67,8 +70,8 @@
       const startMonth = parseInt(document.getElementById('month').value, 10);
       const months = parseInt(document.getElementById('months').value, 10);
 
-      const buffer = await Calendar.generateCalendarDocx(startYear, startMonth, months);
-      const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      const doc = Calendar.generateCalendarDocx(startYear, startMonth, months);
+      const blob = await Calendar.Packer.toBlob(doc);
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
