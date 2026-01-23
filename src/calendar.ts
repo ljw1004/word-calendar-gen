@@ -158,7 +158,7 @@ function generateCalendarRows(startYear: number, startMonth: number, months: num
       rows.push(
         new TableRow({
           children: labelCells,
-          height: { value: ROW_HEIGHT, rule: HeightRule.EXACT },
+          height: { value: ROW_HEIGHT, rule: HeightRule.ATLEAST },
           cantSplit: true,
         })
       );
@@ -194,7 +194,7 @@ function generateCalendarRows(startYear: number, startMonth: number, months: num
       rows.push(
         new TableRow({
           children: cells,
-          height: { value: ROW_HEIGHT, rule: HeightRule.EXACT },
+          height: { value: ROW_HEIGHT, rule: HeightRule.ATLEAST },
           cantSplit: true,
         })
       );
